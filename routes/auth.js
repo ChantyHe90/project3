@@ -58,7 +58,9 @@ router.post("/signup", (req, res, next) => {
 
 // /api//login
 router.post("/login", (req, res, next) => {
-  passport.enticate("local", (err, theUser, failureDetails) => {
+  console.log("bla");
+  passport.authenticate("local", (err, theUser, failureDetails) => {
+    console.log("blub");
     if (err) {
       res.status(500).json({ message: "Something went wrong enticating user" });
       return;
@@ -82,6 +84,13 @@ router.post("/login", (req, res, next) => {
       res.status(200).json(theUser);
     });
   })(req, res, next);
+  console.log("blub 2");
 });
 
+// /api/logout
+router.get("/logout", function(req, res) {
+  console.log("trying to logout....");
+  req.logout();
+  res.json({ message: "lougout success" });
+});
 module.exports = router;
