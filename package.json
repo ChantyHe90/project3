@@ -21,6 +21,8 @@
     "passport-local": "^1.0.0"
   },
   "nodemonConfig": {
-    "ignore": ["client/*"]
+    "ignore": [
+      "client/*"
+    ]
   }
 }
