@@ -8,7 +8,8 @@ const User = require("../models/user");
 
 // /api/auth/checkuser
 authRouter.get("/checkuser", (req, res, next) => {
-  console.log("hi");
+  console.log("we are on /checkuser");
+
   if (req.user) {
     res.json({ userDoc: req.user });
   } else {
@@ -74,11 +75,11 @@ authRouter.post("/signup", (req, res, next) => {
   });
 });
 
-// /api//login
+// /api/auth/login
 authRouter.post("/login", (req, res, next) => {
-  console.log("bla");
+  console.log("user sucessfully logged in");
   passport.authenticate("local", (err, theUser, failureDetails) => {
-    console.log("blub");
+    console.log("user is authenticated");
     if (err) {
       res.status(500).json({ message: "Something went wrong enticating user" });
       return;
@@ -102,14 +103,16 @@ authRouter.post("/login", (req, res, next) => {
       res.status(200).json(theUser);
     });
   })(req, res, next);
-  console.log("blub 2");
+  console.log("login finished");
 });
 
 //POST /logout
-authRouter.post("/logout", (req, res, next) => {
+authRouter.get("/logout", (req, res, next) => {
   // req.logout()  by passport
   req.logout();
+
   res.status(200).json({ message: "Logout!" });
-  this.props.history.push("/");
 });
+
 module.exports = authRouter;
+// app.use("/api/auth", authRouter);

@@ -1,10 +1,9 @@
-var express = require("express");
-var router = express.Router();
-
+let express = require("express");
+let foodsRouter = express.Router();
 let Food = require("../models/foodExtended");
 
 // GET api/foods
-router.get("/", function(req, res, next) {
+foodsRouter.get("/foods", function(req, res, next) {
   Food.find()
     .populate("project")
     .then(response => {
@@ -13,7 +12,7 @@ router.get("/", function(req, res, next) {
 });
 
 // POST /api/foods
-router.post("/", (req, res, next) => {
+foodsRouter.post("/foods", (req, res, next) => {
   // { project_id : '1i263516253gd5', title: 'Clean the room' }
 
   Food.create({
@@ -24,4 +23,4 @@ router.post("/", (req, res, next) => {
   });
 });
 
-module.exports = router;
+module.exports = foodsRouter;

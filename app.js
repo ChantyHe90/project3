@@ -14,6 +14,7 @@ let projectsRouter = require("./routes/projects");
 let foodsRouter = require("./routes/foodsExtended");
 
 var app = express();
+// mongoDB
 
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -53,7 +54,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/projects", projectsRouter);
-app.use("/api/foods", foodsRouter);
+app.use("/api/foodsExtended", foodsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,10 +1,13 @@
 import React from "react";
 import ProjectList from "./components/ProjectList";
-import Signup from "./components/Signup";
 import { Redirect, Switch, Route } from "react-router-dom";
+import Quagga from "quagga";
+
+// components
+import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import Quagga from "quagga";
+import Foods from "./components/Foods";
 
 class App extends React.Component {
   state = {
@@ -70,10 +73,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Hello,{" "}
+        Hello,
         {this.state.loggedInUser
           ? this.state.loggedInUser.username
-          : "Stranger"}{" "}
+          : "Stranger"}
         !
         <Navbar updateUser={this.updateUserHandler} />
         <Switch>
@@ -84,7 +87,13 @@ class App extends React.Component {
           ></Route>
           <Route
             path="/profile"
-            render={() => <ProjectList></ProjectList>}
+            render={() => {
+              if (this.state.loggedInUser) {
+                return <ProjectList></ProjectList>;
+              } else {
+                return <Redirect to="/"></Redirect>;
+              }
+            }}
           ></Route>
 
           <Route
@@ -104,6 +113,8 @@ class App extends React.Component {
               }
             }}
           ></Route>
+
+          <Route path="/foodsExtended" render={() => <Foods></Foods>}></Route>
         </Switch>
         <div id="yourElement"></div>;
       </div>
