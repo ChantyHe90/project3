@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import Logout from "../components/Logout";
+
 import axios from "axios";
 import { Link } from "react-router-dom";
+
 export default class Navbar extends Component {
   LogoutHandler = () => {
     axios
-      .get("/api/auth/logout")
+      .post("/api/auth/logout")
       .then(res => {
         console.log(res, "res");
         this.props.updateUser(null);
