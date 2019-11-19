@@ -4,6 +4,7 @@ import Signup from "./components/Signup";
 import { Redirect, Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
+
 class App extends React.Component {
   state = {
     loggedInUser: this.props.user
