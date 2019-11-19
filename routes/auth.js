@@ -107,10 +107,12 @@ authRouter.post("/login", (req, res, next) => {
 });
 
 //POST /logout
-authRouter.post("/logout", (req, res, next) => {
+authRouter.get("/logout", (req, res, next) => {
   // req.logout()  by passport
   req.logout();
+
   res.status(200).json({ message: "Logout!" });
-  this.props.history.push("/");
 });
+
 module.exports = authRouter;
+// app.use("/api/auth", authRouter);

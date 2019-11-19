@@ -73,10 +73,10 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        Hello,{" "}
+        Hello,
         {this.state.loggedInUser
           ? this.state.loggedInUser.username
-          : "Stranger"}{" "}
+          : "Stranger"}
         !
         <Navbar updateUser={this.updateUserHandler} />
         <Switch>
@@ -87,7 +87,13 @@ class App extends React.Component {
           ></Route>
           <Route
             path="/profile"
-            render={() => <ProjectList></ProjectList>}
+            render={() => {
+              if (this.state.loggedInUser) {
+                return <ProjectList></ProjectList>;
+              } else {
+                return <Redirect to="/"></Redirect>;
+              }
+            }}
           ></Route>
 
           <Route

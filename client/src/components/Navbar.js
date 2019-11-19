@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default class Navbar extends Component {
   LogoutHandler = () => {
     axios
-      .post("/api/auth/logout")
+      .get("/api/auth/logout")
       .then(res => {
         console.log(res, "res");
         this.props.updateUser(null);
