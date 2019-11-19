@@ -18,7 +18,8 @@
     "mongoose": "^5.7.8",
     "morgan": "~1.9.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "quagga": "^0.12.1"
   },
   "nodemonConfig": {
     "ignore": [

@@ -7,13 +7,9 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 
 // /api/auth/checkuser
-<<<<<<< Updated upstream
 authRouter.get("/checkuser", (req, res, next) => {
-  console.log("hi");
-=======
-router.get("/checkuser", (req, res, next) => {
   console.log("we are on /checkuser");
->>>>>>> Stashed changes
+
   if (req.user) {
     res.json({ userDoc: req.user });
   } else {
@@ -79,15 +75,9 @@ authRouter.post("/signup", (req, res, next) => {
   });
 });
 
-<<<<<<< Updated upstream
-// /api//login
-authRouter.post("/login", (req, res, next) => {
-  console.log("bla");
-=======
 // /api/auth/login
-router.post("/login", (req, res, next) => {
+authRouter.post("/login", (req, res, next) => {
   console.log("user sucessfully logged in");
->>>>>>> Stashed changes
   passport.authenticate("local", (err, theUser, failureDetails) => {
     console.log("user is authenticated");
     if (err) {
