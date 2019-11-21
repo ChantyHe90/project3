@@ -7,7 +7,7 @@ export class Scanner extends Component {
     Quagga.init(
       {
         debug: false,
-        frequency: 10,
+        frequency: 5,
         inputStream: {
           name: "Live",
           type: "LiveStream",
@@ -60,13 +60,11 @@ export class Scanner extends Component {
       }
     );
     Quagga.onProcessed(result => {
-      console.log("processed", result);
       var drawingCtx = Quagga.canvas.ctx.overlay,
         drawingCanvas = Quagga.canvas.dom.overlay;
 
       if (result) {
         if (result.boxes) {
-          console.log("result boxes", Quagga.canvas.ctx.overlay);
           drawingCtx.clearRect(
             0,
             0,
@@ -78,7 +76,6 @@ export class Scanner extends Component {
               return box !== result.box;
             })
             .forEach(function(box) {
-              console.log("bla", box);
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                 color: "green",
                 lineWidth: 2
@@ -104,8 +101,7 @@ export class Scanner extends Component {
       }
     });
     Quagga.onDetected(data => {
-      console.log("detected", data);
-      console.log(data.codeResult);
+      this.props.onDetected(data.codeResult.code);
       Quagga.offProcessed();
     });
   }
