@@ -7,7 +7,6 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Foods from "./components/Foods";
 import Scanner from "./components/Scanner";
-import Result from "./components/Result";
 import "./App.css";
 
 class App extends React.Component {
@@ -23,16 +22,15 @@ class App extends React.Component {
       loggedInUser: userObj
     });
   };
-  // barcode
-  _scan = this._scan.bind(this);
 
-  _scan() {
+  scanHandler = () => {
     this.setState({ scanning: !this.state.scanning });
-  }
-  _onDetected = this._onDetected.bind(this);
-  _onDetected(result) {
+  };
+
+  detectedHandler = result => {
     this.setState({ results: this.state.results.concat([result]) });
-  }
+    console.log(this.state.results);
+  };
 
   render() {
     return (
@@ -43,16 +41,12 @@ class App extends React.Component {
           : "Stranger"}
         !
         <Navbar updateUser={this.updateUserHandler} />
-        <button onClick={this._scan}>
+        <button onClick={this.scanHandler}>
           {this.state.scanning ? "Stop" : "Start"}
         </button>
-        {/* barcode stop */}
-        <ul className="results">
-          {this.state.results.map(result => (
-            <Result key={result.codeResult.code} result={result} />
-          ))}
-        </ul>
-        {this.state.scanning ? <Scanner onDetected={this._onDetected} /> : null}
+        {this.state.scanning ? (
+          <Scanner onDetected={this.detectedHandler} />
+        ) : null}
         <Switch>
           {/* <Route path="/profile" component={ProjectList}></Route> */}
           <Route
@@ -90,7 +84,6 @@ class App extends React.Component {
 
           <Route path="/foodsExtended" render={() => <Foods></Foods>}></Route>
         </Switch>
-        <div id="yourElement"></div>;
       </div>
     );
   }
