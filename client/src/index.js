@@ -5,7 +5,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 document.getElementById("root").innerText =
   "The React app has not connected to the backend yet.";
 

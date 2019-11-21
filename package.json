@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.3.1",
     "connect-mongo": "^3.1.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -19,7 +20,8 @@
     "morgan": "~1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "quagga": "^0.12.1"
+    "quagga": "^0.12.1",
+    "react-bootstrap": "^1.0.0-beta.16"
   },
   "nodemonConfig": {
     "ignore": [
