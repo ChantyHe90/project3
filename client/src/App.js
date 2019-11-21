@@ -7,12 +7,14 @@ import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Foods from "./components/Foods";
 import Scanner from "./components/Scanner";
+import Result from "./components/Result";
 import "./App.css";
+import Quagga from "quagga";
 
 class App extends React.Component {
   state = {
     loggedInUser: this.props.user,
-    detected: [],
+    detected: false,
     scanning: false,
     results: []
   };
@@ -28,8 +30,13 @@ class App extends React.Component {
   };
 
   detectedHandler = result => {
-    this.setState({ results: this.state.results.concat([result]) });
+    this.setState({
+      results: this.state.results.concat([result]),
+      scanning: !this.state.scanning,
+      detected: !this.state.detected
+    });
     console.log(this.state.results);
+    Quagga.offDetected();
   };
 
   render() {
@@ -46,6 +53,9 @@ class App extends React.Component {
         </button>
         {this.state.scanning ? (
           <Scanner onDetected={this.detectedHandler} />
+        ) : null}
+        {this.state.detected ? (
+          <Result eanCode={this.state.results[0]} />
         ) : null}
         <Switch>
           {/* <Route path="/profile" component={ProjectList}></Route> */}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Quagga from "quagga";
-import PropTypes from "prop-types";
 
 export class Scanner extends Component {
   componentDidMount() {
@@ -11,6 +10,10 @@ export class Scanner extends Component {
         inputStream: {
           name: "Live",
           type: "LiveStream",
+          // constraints: {
+          //   width: 640,
+          //   height: 480
+          // },
           area: {
             // defines rectangle of the detection/localization area
             top: "20%", // top offset
@@ -27,29 +30,10 @@ export class Scanner extends Component {
             // "ean_8_reader"
             // "code_39_reader"
           ]
-          // debug: {
-          //   drawBoundingBox: true,
-          //   showFrequency: true,
-          //   drawScanline: true,
-          //   showPattern: true
-          // }
+        },
+        locator: {
+          patchSize: "large"
         }
-        // locator: {
-        //   debug: {
-        //     showCanvas: true,
-        //     showPatches: true,
-        //     showFoundPatches: true,
-        //     showSkeleton: true,
-        //     showLabels: true,
-        //     showPatchLabels: true,
-        //     showRemainingPatchLabels: true,
-        //     boxFromPatches: {
-        //       showTransformed: true,
-        //       showTransformedBox: true,
-        //       showBB: true
-        //     }
-        //   }
-        // }
       },
       function(err) {
         if (err) {
@@ -109,7 +93,5 @@ export class Scanner extends Component {
     return <div id="interactive" className="viewport" />;
   }
 }
-Scanner.propTypes = {
-  onDetected: PropTypes.func.isRequired
-};
+
 export default Scanner;
