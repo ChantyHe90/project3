@@ -12,6 +12,7 @@ var indexRouter = require("./routes/index");
 var authRouter = require("./routes/auth");
 let projectsRouter = require("./routes/projects");
 let foodsRouter = require("./routes/foodsExtended");
+let productRouter = require("./routes/product");
 
 var app = express();
 // mongoDB
@@ -55,6 +56,7 @@ app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/projects", projectsRouter);
 app.use("/api/foodsExtended", foodsRouter);
+app.use("/api/products", productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
