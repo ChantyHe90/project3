@@ -1,7 +1,6 @@
 import React from "react";
 import ProjectList from "./components/ProjectList";
 import { Redirect, Switch, Route } from "react-router-dom";
-
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
@@ -35,6 +34,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <MyFilteringComponent></MyFilteringComponent>
         Hello,
         {this.state.loggedInUser
           ? this.state.loggedInUser.username
@@ -51,7 +51,13 @@ class App extends React.Component {
           {/* <Route path="/profile" component={ProjectList}></Route> */}
           <Route
             path="/login"
-            render={() => <Login updateUser={this.updateUserHandler}></Login>}
+            render={() => {
+              if (this.state.loggedInUser) {
+                return <Redirect to="/profile"></Redirect>;
+              } else {
+                return <Login updateUser={this.updateUserHandler}></Login>;
+              }
+            }}
           ></Route>
           <Route
             path="/profile"
