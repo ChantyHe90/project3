@@ -10,6 +10,23 @@ import Result from "./components/Result";
 import "./App.css";
 import Quagga from "quagga";
 
+function findMostCommonValue(array) {
+  if (array.length == 0) return null;
+  var modeMap = {};
+  var maxEl = array[0],
+    maxCount = 1;
+  for (var i = 0; i < array.length; i++) {
+    var el = array[i];
+    if (modeMap[el] == null) modeMap[el] = 1;
+    else modeMap[el]++;
+    if (modeMap[el] > maxCount) {
+      maxEl = el;
+      maxCount = modeMap[el];
+    }
+    return maxEl;
+  }
+}
+
 class App extends React.Component {
   state = {
     loggedInUser: this.props.user,
@@ -29,13 +46,19 @@ class App extends React.Component {
   };
 
   detectedHandler = result => {
-    this.setState({
-      results: this.state.results.concat([result]),
-      scanning: !this.state.scanning,
-      detected: !this.state.detected
-    });
-    console.log(this.state.results);
-    Quagga.offDetected();
+    if (this.state.results.length < 5) {
+      this.setState({
+        results: this.state.results.concat([result])
+      });
+    } else {
+      this.setState({
+        scanning: !this.state.scanning,
+        detected: !this.state.detected,
+        results: findMostCommonValue(this.state.results)
+      });
+      console.log(this.state.results);
+      Quagga.offDetected();
+    }
   };
 
   render() {
@@ -54,9 +77,7 @@ class App extends React.Component {
         {this.state.scanning ? (
           <Scanner onDetected={this.detectedHandler} />
         ) : null}
-        {this.state.detected ? (
-          <Result eanCode={this.state.results[0]} />
-        ) : null}
+        {this.state.detected ? <Result eanCode={this.state.results} /> : null}
         <Switch>
           {/* <Route path="/profile" component={ProjectList}></Route> */}
           <Route
