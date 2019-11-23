@@ -23,6 +23,18 @@
 
 #interactive {
   position: relative;
+  width: 400px;
+  height: 400px;
+  background-color: #282c34;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  /* margin-left: 20%;
+  margin-top: 20%;
+  margin-right: 20%;
+  margin-bottom: 20%; */
 }
 
 canvas.drawing,
@@ -30,5 +42,8 @@ canvas.drawingBuffer {
   position: absolute;
   left: 0;
   top: 0;
-  max-width: 100%;
+  width: 60%;
+  height: 60%;
+  border: 2px red solid;
+  margin: 20%;
 }
