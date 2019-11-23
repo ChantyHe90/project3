@@ -4,12 +4,12 @@ import { Redirect, Switch, Route } from "react-router-dom";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
-import Foods from "./components/Foods";
+import Foods from "./components/FoodList";
 import Scanner from "./components/Scanner";
 import Result from "./components/Result";
 import "./App.css";
 import Quagga from "quagga";
-
+import ManualSearch from "./components/ManualSearch";
 class App extends React.Component {
   state = {
     loggedInUser: this.props.user,
@@ -41,7 +41,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <MyFilteringComponent></MyFilteringComponent>
+        {/* <MyFilteringComponent></MyFilteringComponent> */}
         Hello,
         {this.state.loggedInUser
           ? this.state.loggedInUser.username
@@ -100,6 +100,7 @@ class App extends React.Component {
 
           <Route path="/foodsExtended" render={() => <Foods></Foods>}></Route>
         </Switch>
+        <ManualSearch />
       </div>
     );
   }
