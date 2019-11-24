@@ -6,7 +6,9 @@ const foodFromListSchema = new Schema({
   img: String,
   group: String,
   emission: Number,
-  car: Number
+  car: Number,
+  owner: { type: Schema.Types.ObjectId, ref: "User" }
+  // every foodItem belongs to an User
 });
 
 const foodFromList = mongoose.model("foodFromList", foodFromListSchema);

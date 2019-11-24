@@ -1109,3 +1109,26 @@ let foods = [
     car: 0
   }
 ];
+
+let mongoose = require("mongoose");
+require("dotenv").config();
+
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Connected to Mongo!");
+  })
+  .catch(err => {
+    console.error("Error connecting to mongo", err);
+  });
+
+const foodFromList = require("../models/foodFromList");
+// will always delete the last one > seeds.js will be up to date
+foodFromList.deleteMany({}).then(() => {
+  console.log("deleted all existing foods");
+
+  foodFromList.create(foods).then(() => {
+    console.log("import done");
+    mongoose.disconnect();
+  });
+});
