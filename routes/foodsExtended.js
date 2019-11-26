@@ -2,6 +2,7 @@ let express = require("express");
 let foodsRouter = express.Router();
 // let Food = require("../models/foodExtended");
 let foodFromList = require("../models/foodFromList");
+let User = require("../models/user");
 
 // // GET api/foods
 // foodsRouter.get("/foods", function(req, res, next) {
@@ -27,14 +28,17 @@ foodsRouter.get("/", function(req, res, next) {
 foodsRouter.post("/", (req, res, next) => {
   // { project_id : '1i263516253gd5', title: 'Clean the room' }
   console.log("food POST is here");
-  foodFromList
-    .create({
-      name: req.body.name,
-      owner: req.user._id
-    })
-    .then(response => {
-      res.json(response);
-      console.log("response", response);
+
+  // user model:  addedFoodItems: []
+  User.findByIdAndUpdate(
+    { _id: req.user.id },
+    { $push: { addedFooditems: req.body.name } },
+    { new: true }
+  )
+    // update foodlist .p
+    .then(userObj => {
+      console.log("HELLOresponse", userObj.addedFooditems);
+      res.json(userObj.addedFooditems);
     });
 });
 

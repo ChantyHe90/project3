@@ -31,15 +31,29 @@ function findMostCommonValue(array) {
 
 class App extends React.Component {
   state = {
-    loggedInUser: this.props.username,
+    loggedInUser: this.props.user,
     detected: false,
     scanning: false,
     results: []
   };
 
   updateUserHandler = userObj => {
+    // console.log("updating user");
+    // console.log(userObj);
     this.setState({
       loggedInUser: userObj
+    });
+  };
+
+  addFoodHandler = array => {
+    let copy = { ...this.state.loggedInUser };
+    console.log("array");
+    console.log(array);
+    copy.addedFooditems = array;
+    console.log("copy");
+    console.log(copy);
+    this.setState({
+      loggedInUser: copy
     });
   };
 
@@ -96,7 +110,12 @@ class App extends React.Component {
             path="/profile"
             render={() => {
               if (this.state.loggedInUser) {
-                return <Profile></Profile>;
+                return (
+                  <Profile
+                    user={this.state.loggedInUser}
+                    addFood={this.addFoodHandler}
+                  ></Profile>
+                );
               } else {
                 return <Redirect to="/"></Redirect>;
               }
@@ -122,7 +141,6 @@ class App extends React.Component {
           ></Route>
 
           <Route path="/foodsExtended" render={() => <Foods></Foods>}></Route>
-          <Route path="/profile" render={() => <Profile></Profile>}></Route>
         </Switch>
       </div>
     );

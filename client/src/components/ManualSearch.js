@@ -69,7 +69,7 @@ class ManualSearch extends Component {
           </Form>
           <UserAddsFood
             searchTerm={this.state.searchTerm}
-            addFood={this.getFoodBySearch}
+            addFood={this.props.addFood}
           />
         </div>
       </div>
