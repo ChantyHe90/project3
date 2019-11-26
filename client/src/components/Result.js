@@ -20,9 +20,7 @@ export class Result extends Component {
     if (this.state.product === null) {
       return <div>Loading</div>;
     }
-    return (
-      <div id="barcodeResult">Product:{this.state.product.generic_name_de}</div>
-    );
+    return <div id="barcodeResult">Product:{this.state.product.emission}</div>;
   }
 }
 
