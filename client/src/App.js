@@ -10,6 +10,7 @@ import Result from "./components/Result";
 import "./App.css";
 import Quagga from "quagga";
 import ManualSearch from "./components/ManualSearch";
+import Profile from "./components/Profile";
 
 function findMostCommonValue(array) {
   if (array.length == 0) return null;
@@ -30,7 +31,7 @@ function findMostCommonValue(array) {
 
 class App extends React.Component {
   state = {
-    loggedInUser: this.props.user,
+    loggedInUser: this.props.username,
     detected: false,
     scanning: false,
     results: []
@@ -95,7 +96,7 @@ class App extends React.Component {
             path="/profile"
             render={() => {
               if (this.state.loggedInUser) {
-                return <ProjectList></ProjectList>;
+                return <Profile></Profile>;
               } else {
                 return <Redirect to="/"></Redirect>;
               }
@@ -121,8 +122,8 @@ class App extends React.Component {
           ></Route>
 
           <Route path="/foodsExtended" render={() => <Foods></Foods>}></Route>
+          <Route path="/profile" render={() => <Profile></Profile>}></Route>
         </Switch>
-        <ManualSearch />
       </div>
     );
   }

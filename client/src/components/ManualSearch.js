@@ -2,19 +2,16 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 // here manual search will be shown
-
+import UserAddsFood from "./UserAddsFood";
 class ManualSearch extends Component {
   constructor() {
     super();
     this.state = {
-      searchTerm: "",
+      searchTerm: [],
       foods: []
-      //   foodList: ["a", "b"]
-      // pass the database in here HOW?
     };
   }
   getFoodBySearch = () => {
-    // real-world scenarios would have to use pagination here "/",
     axios
       .get("/api/foods?searchTerm=" + this.state.searchTerm)
       .then(response => {
@@ -23,6 +20,7 @@ class ManualSearch extends Component {
         this.setState({ foods: response.data }); // this triggers a re-render
       });
   };
+
   handleFormSubmit = e => {
     // Prevent button click from submitting form
     e.preventDefault();
@@ -33,12 +31,7 @@ class ManualSearch extends Component {
       searchTerm: e.target.value
     });
   };
-  // not working
-  // addToProfile = e => {
-  //   getFoodBySearch.then (response=> {
-  //     console.log("response.data : " + JSON.stringify(response.data));
-  //   }
-  // };
+
   render() {
     return (
       <div className="content">
@@ -73,8 +66,11 @@ class ManualSearch extends Component {
             >
               search
             </Button>
-            <Button onClick={this.addToProfile}>Add to Profile</Button>
           </Form>
+          <UserAddsFood
+            searchTerm={this.state.searchTerm}
+            addFood={this.getFoodBySearch}
+          />
         </div>
       </div>
     );
