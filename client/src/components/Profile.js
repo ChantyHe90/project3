@@ -6,7 +6,10 @@ export class Profile extends Component {
   render() {
     return (
       <div>
-        <ManualSearch />
+        {this.props.user.addedFooditems.map(item => (
+          <h1>{item}</h1>
+        ))}
+        <ManualSearch addFood={this.props.addFood} />
       </div>
     );
   }

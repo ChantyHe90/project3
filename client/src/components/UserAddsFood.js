@@ -7,16 +7,15 @@ class UserAddsFood extends React.Component {
     const data = {
       name: this.props.searchTerm
     };
-    console.log(data);
+    console.log("Here is the added:", data.name);
     axios
       .post("/api/foods", data)
       .then(response => {
         // this.setState({
         //   name: ""
         // });
-        this.props.addFood();
-        const newCreated = response.data;
-        this.props.addFood(newCreated);
+        const addedFooditems = response.data;
+        this.props.addFood(addedFooditems);
       })
       .catch(() => {});
   };
