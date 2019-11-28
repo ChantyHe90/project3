@@ -7,7 +7,8 @@ const foodExtendedSchema = new Schema({
   // generic_name
   code: String,
   foodfromlists: String,
-  emission: Number
+  emission: Number,
+  images: String
   //called "code"
   //"codes_tags"
   // codes_tags.[0] tells how many characters the code has
@@ -25,6 +26,7 @@ const foodExtendedSchema = new Schema({
   //   default:
   //     "http://pluspng.com/img-png/gruner-apfel-png-die-aktuellesten-stellen-aus-dem-bereich-medical-2008.png"
   // },
+  // !! we need selected_images > front > small /display/thumb
   // CO2id: String
   // How to refer to other models:
   // project: { type: Schema.Types.ObjectId, ref: "Project" }

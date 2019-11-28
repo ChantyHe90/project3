@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Quagga from "quagga";
+import { Card, Button } from "react-bootstrap";
 
 export class Scanner extends Component {
   componentDidMount() {
@@ -90,7 +91,20 @@ export class Scanner extends Component {
     });
   }
   render() {
-    return <div id="interactive" className="viewport" />;
+    return (
+      <div>
+        <Card style={{ width: "400" }}>
+          <Card.Img variant="top" src="" />
+          <Card.Body>
+            <Card.Title>Scanner</Card.Title>
+            <div id="interactive" className="viewport" />;
+            <Button variant="primary">
+              In the future I will bring you to the ManualSearch
+            </Button>
+          </Card.Body>
+        </Card>
+      </div>
+    );
   }
 }
 
