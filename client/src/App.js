@@ -62,7 +62,7 @@ class App extends React.Component {
   };
 
   detectedHandler = result => {
-    if (this.state.results.length < 5) {
+    if (this.state.results.length < 10 && result.length === 13) {
       this.setState({
         results: this.state.results.concat([result])
       });

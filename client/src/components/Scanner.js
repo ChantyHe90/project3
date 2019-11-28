@@ -68,12 +68,12 @@ export class Scanner extends Component {
             });
         }
 
-        if (result.box) {
-          Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
-            color: "#00F",
-            lineWidth: 2
-          });
-        }
+        // if (result.box) {
+        //   Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
+        //     color: "#00F",
+        //     lineWidth: 2
+        //   });
+        // }
 
         if (result.codeResult && result.codeResult.code) {
           Quagga.ImageDebug.drawPath(
@@ -97,12 +97,12 @@ export class Scanner extends Component {
           <Card.Img variant="top" src="" />
           <Card.Body>
             <Card.Title>Scanner</Card.Title>
-            <div id="interactive" className="viewport" />;
             <Button variant="primary">
               In the future I will bring you to the ManualSearch
             </Button>
           </Card.Body>
         </Card>
+        <div id="interactive" className="viewport" />;
       </div>
     );
   }
