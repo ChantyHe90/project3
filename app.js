@@ -13,6 +13,7 @@ var authRouter = require("./routes/auth");
 let projectsRouter = require("./routes/projects");
 let foodsRouter = require("./routes/foodsExtended");
 let productRouter = require("./routes/product");
+let scanRouter = require("./routes/scan");
 
 var app = express();
 // mongoDB
@@ -49,17 +50,17 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
+app.use(express.static(path.join(__dirname, "/client/build")));
 // this needs to be after all the other setup (i.e. the order is important )
 app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/projects", projectsRouter);
 app.use("/api/foods", foodsRouter);
 app.use("/api/products", productRouter);
+app.use("/api/scan", scanRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use("/api", function(req, res, next) {
   next(createError(404));
 });
 
@@ -74,6 +75,11 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.json({ message: err.message });
+});
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/client/build/index.html");
 });
 
 module.exports = app;

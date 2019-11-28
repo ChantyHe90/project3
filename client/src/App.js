@@ -5,36 +5,14 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import Foods from "./components/FoodList";
-import Scanner from "./components/Scanner";
-import Result from "./components/Result";
 import "./App.css";
-import Quagga from "quagga";
 import ManualSearch from "./components/ManualSearch";
 import Profile from "./components/Profile";
-
-function findMostCommonValue(array) {
-  if (array.length == 0) return null;
-  var modeMap = {};
-  var maxEl = array[0],
-    maxCount = 1;
-  for (var i = 0; i < array.length; i++) {
-    var el = array[i];
-    if (modeMap[el] == null) modeMap[el] = 1;
-    else modeMap[el]++;
-    if (modeMap[el] > maxCount) {
-      maxEl = el;
-      maxCount = modeMap[el];
-    }
-    return maxEl;
-  }
-}
+import ScanningFrame from "./components/ScanningFrame";
 
 class App extends React.Component {
   state = {
-    loggedInUser: this.props.user,
-    detected: false,
-    scanning: false,
-    results: []
+    loggedInUser: this.props.user
   };
 
   updateUserHandler = userObj => {
@@ -57,26 +35,6 @@ class App extends React.Component {
     });
   };
 
-  scanHandler = () => {
-    this.setState({ scanning: !this.state.scanning });
-  };
-
-  detectedHandler = result => {
-    if (this.state.results.length < 5) {
-      this.setState({
-        results: this.state.results.concat([result])
-      });
-    } else {
-      this.setState({
-        scanning: !this.state.scanning,
-        detected: !this.state.detected,
-        results: findMostCommonValue(this.state.results)
-      });
-      console.log(this.state.results);
-      Quagga.offDetected();
-    }
-  };
-
   render() {
     return (
       <div>
@@ -87,13 +45,6 @@ class App extends React.Component {
           : "Stranger"}
         !
         <Navbar updateUser={this.updateUserHandler} />
-        <button onClick={this.scanHandler}>
-          {this.state.scanning ? "Stop" : "Start"}
-        </button>
-        {this.state.scanning ? (
-          <Scanner onDetected={this.detectedHandler} />
-        ) : null}
-        {this.state.detected ? <Result eanCode={this.state.results} /> : null}
         <Switch>
           {/* <Route path="/profile" component={ProjectList}></Route> */}
 
@@ -105,6 +56,12 @@ class App extends React.Component {
               } else {
                 return <Login updateUser={this.updateUserHandler}></Login>;
               }
+            }}
+          ></Route>
+          <Route
+            path="/scan"
+            render={() => {
+              return <ScanningFrame></ScanningFrame>;
             }}
           ></Route>
           <Route

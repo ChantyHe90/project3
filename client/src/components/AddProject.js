@@ -3,8 +3,9 @@ import axios from "axios";
 
 class AddProject extends React.Component {
   state = {
-    title: "",
-    description: ""
+    product_name: "",
+    code: "",
+    foodfromlists: ""
   };
 
   submitHandler = event => {
@@ -14,8 +15,9 @@ class AddProject extends React.Component {
       .post("/api/projects", this.state)
       .then(response => {
         this.setState({
-          title: "",
-          description: ""
+          product_name: "",
+          code: "",
+          foodfromlists: ""
         });
 
         this.props.addProject();
@@ -25,35 +27,48 @@ class AddProject extends React.Component {
       .catch(() => {});
   };
 
-  changeTitleHandler = event => {
+  changeNameHandler = event => {
     this.setState({
-      title: event.target.value
+      product_name: event.target.value
     });
   };
 
-  changeDescHandler = event => {
+  changeCodeHandler = event => {
     this.setState({
-      description: event.target.value
+      code: event.target.value
+    });
+  };
+
+  changeCategoryHandler = event => {
+    this.setState({
+      foodfromlists: event.target.value
     });
   };
 
   render() {
     return (
       <div>
-        <h1>Add a new Project: </h1>
+        <h3>Add a new Product: </h3>
         <form onSubmit={this.submitHandler}>
           <input
-            onChange={this.changeTitleHandler}
-            value={this.state.title}
+            onChange={this.changeNameHandler}
+            value={this.state.product_name}
             type="text"
-            placeholder="title"
+            placeholder="Product"
           ></input>
           <br></br>
           <input
-            onChange={this.changeDescHandler}
-            value={this.state.description}
+            onChange={this.changeCodeHandler}
+            value={this.state.code}
             type="text"
-            placeholder="description"
+            placeholder="EAN Code"
+          ></input>
+          <br></br>
+          <input
+            onChange={this.changeCategoryHandler}
+            value={this.state.foodfromlists}
+            type="text"
+            placeholder="Category"
           ></input>
           <button type="submit">Submit</button>
         </form>
