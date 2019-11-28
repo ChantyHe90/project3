@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const foodExtendedSchema = new Schema({
   product_name: String,
   // generic_name
-  code: String
+  code: String,
+  foodfromlists: String,
+  emission: Number
   //called "code"
   //"codes_tags"
   // codes_tags.[0] tells how many characters the code has
