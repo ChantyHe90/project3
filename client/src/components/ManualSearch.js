@@ -38,7 +38,10 @@ class ManualSearch extends Component {
         <h1>
           result:
           {this.state.foods.map(food => (
-            <p>{food.name}</p>
+            <p>
+              {food.product_name}
+              {food.images}
+            </p>
           ))}
         </h1>
         <div className="input-group-prepend justify-content-center">

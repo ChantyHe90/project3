@@ -1,7 +1,8 @@
 let express = require("express");
 let foodsRouter = express.Router();
 // let Food = require("../models/foodExtended");
-let foodFromList = require("../models/foodFromList");
+
+let foodExtended = require("../models/foodExtended");
 let User = require("../models/user");
 
 // // GET api/foods
@@ -17,7 +18,7 @@ let User = require("../models/user");
 foodsRouter.get("/", function(req, res, next) {
   let searchTerm = req.query.searchTerm;
   // postman: testbeispiel localhost:5555/api/foods?searchTerm=olive_oil
-  foodFromList.find({ name: searchTerm }).then(response => {
+  foodExtended.find({ product_name: searchTerm }).then(response => {
     res.json(response);
     console.log("response", response);
     // how to access?
@@ -32,7 +33,7 @@ foodsRouter.post("/", (req, res, next) => {
   // user model:  addedFoodItems: []
   User.findByIdAndUpdate(
     { _id: req.user.id },
-    { $push: { addedFooditems: req.body.name } },
+    { $push: { addedFooditems: req.body.product_name } },
     { new: true }
   )
     // update foodlist .p

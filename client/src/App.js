@@ -96,6 +96,7 @@ class App extends React.Component {
         {this.state.detected ? <Result eanCode={this.state.results} /> : null}
         <Switch>
           {/* <Route path="/profile" component={ProjectList}></Route> */}
+
           <Route
             path="/login"
             render={() => {

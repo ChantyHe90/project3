@@ -5,9 +5,9 @@ class UserAddsFood extends React.Component {
   submitHandler = e => {
     e.preventDefault();
     const data = {
-      name: this.props.searchTerm
+      product_name: this.props.searchTerm
     };
-    console.log("Here is the added:", data.name);
+    console.log("Here is the added:", data.product_name);
     axios
       .post("/api/foods", data)
       .then(response => {
